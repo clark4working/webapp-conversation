@@ -70,12 +70,8 @@ const Chat: FC<IChatProps> = ({
   }
 
   const valid = () => {
-    // 注释掉空值验证，允许发送空消息
-    // const query = queryRef.current
-    // if (!query || query.trim() === '') {
-    //   logError(t('app.errorMessage.valueOfVarRequired'))
-    //   return false
-    // }
+    // 移除了文本输入的空值验证，允许发送空消息
+    // 但保留其他可能的验证逻辑（如文件上传状态检查）
     return true
   }
 
