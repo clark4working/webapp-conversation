@@ -70,8 +70,17 @@ const Chat: FC<IChatProps> = ({
   }
 
   const valid = () => {
-    // 移除了文本输入的空值验证，允许发送空消息
-    // 但保留其他可能的验证逻辑（如文件上传状态检查）
+    const query = queryRef.current
+    const hasQuery = query && query.trim() !== ''
+    const hasFiles = files.length > 0
+    const hasAttachments = attachmentFiles.length > 0
+    
+    // 如果既没有文本，也没有文件/附件，则提示错误
+    if (!hasQuery && !hasFiles && !hasAttachments) {
+      logError(t('app.errorMessage.valueOfVarRequired'))
+      return false
+    }
+    
     return true
   }
 
@@ -103,7 +112,9 @@ const Chat: FC<IChatProps> = ({
     }))
     const docAndOtherFiles: VisionFile[] = getProcessedFiles(attachmentFiles)
     const combinedFiles: VisionFile[] = [...imageFiles, ...docAndOtherFiles]
-    onSend(queryRef.current, combinedFiles)
+    // 如果 query 为空，发送一个空格，避免 API 报错
+    const queryToSend = queryRef.current.trim() || ' '
+    onSend(queryToSend, combinedFiles)
     if (!files.find(item => item.type === TransferMethod.local_file && !item.fileId)) {
       if (files.length) { onClear() }
       if (!isResponding) {
