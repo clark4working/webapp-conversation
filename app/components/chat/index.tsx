@@ -112,8 +112,12 @@ const Chat: FC<IChatProps> = ({
     }))
     const docAndOtherFiles: VisionFile[] = getProcessedFiles(attachmentFiles)
     const combinedFiles: VisionFile[] = [...imageFiles, ...docAndOtherFiles]
-    // 如果 query 为空，发送一个空格，避免 API 报错
-    const queryToSend = queryRef.current.trim() || ' '
+    // 如果 query 为空，根据是否有文件决定默认值
+    const currentQuery = queryRef.current || ''
+    const hasAnyFiles = combinedFiles.length > 0
+    const queryToSend = currentQuery.trim() === '' 
+      ? (hasAnyFiles ? '请分析这个文件' : ' ') 
+      : currentQuery
     onSend(queryToSend, combinedFiles)
     if (!files.find(item => item.type === TransferMethod.local_file && !item.fileId)) {
       if (files.length) { onClear() }
