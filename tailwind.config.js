@@ -8,6 +8,10 @@ module.exports = {
     typography: require('./typography'),
     extend: {
       colors: {
+        'chatbot-bg': '#F9FAFB',
+        'text-primary': '#111928',
+        'text-secondary': '#6B7280',
+        'text-tertiary': '#9CA3AF',
         gray: {
           50: '#F9FAFB',
           100: '#F3F4F6',

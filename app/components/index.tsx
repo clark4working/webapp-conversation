@@ -652,14 +652,15 @@ const Main: FC<IMainProps> = () => {
   if (!APP_ID || !APP_INFO || !promptConfig) { return <Loading type='app' /> }
 
   return (
-    <div className='bg-gray-100'>
-      <Header
-        title={APP_INFO.title}
-        isMobile={isMobile}
-        onShowSideBar={showSidebar}
-        onCreateNewChat={() => handleConversationIdChange('-1')}
-      />
-      <div className="flex rounded-t-2xl bg-white overflow-hidden">
+    <div className='relative h-screen bg-chatbot-bg p-4'>
+      <div className="flex flex-col rounded-2xl bg-white shadow-md overflow-hidden max-w-7xl mx-auto h-[calc(100vh-2rem)]">
+        <Header
+          title={APP_INFO.title}
+          isMobile={isMobile}
+          onShowSideBar={showSidebar}
+          onCreateNewChat={() => handleConversationIdChange('-1')}
+        />
+        <div className="flex flex-1 overflow-hidden">
         {/* sidebar */}
         {!isMobile && renderSidebar()}
         {isMobile && isShowSidebar && (
@@ -670,7 +671,7 @@ const Main: FC<IMainProps> = () => {
           </div>
         )}
         {/* main */}
-        <div className='flex-grow flex flex-col h-[calc(100vh_-_3rem)] overflow-y-auto'>
+        <div className='flex-grow flex flex-col overflow-y-auto bg-chatbot-bg'>
           <ConfigSence
             conversationName={conversationName}
             hasSetInputs={hasSetInputs}
@@ -697,6 +698,7 @@ const Main: FC<IMainProps> = () => {
                 />
               </div>)
           }
+        </div>
         </div>
       </div>
     </div>
