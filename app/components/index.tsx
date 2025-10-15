@@ -300,18 +300,19 @@ const Main: FC<IMainProps> = () => {
   }
 
   const checkCanSend = () => {
-    if (currConversationId !== '-1') { return true }
+    // 注释掉输入变量的空值验证，允许空输入
+    // if (currConversationId !== '-1') { return true }
 
-    if (!currInputs || !promptConfig?.prompt_variables) { return true }
+    // if (!currInputs || !promptConfig?.prompt_variables) { return true }
 
-    const inputLens = Object.values(currInputs).length
-    const promptVariablesLens = promptConfig.prompt_variables.length
+    // const inputLens = Object.values(currInputs).length
+    // const promptVariablesLens = promptConfig.prompt_variables.length
 
-    const emptyInput = inputLens < promptVariablesLens || Object.values(currInputs).find(v => !v)
-    if (emptyInput) {
-      logError(t('app.errorMessage.valueOfVarRequired'))
-      return false
-    }
+    // const emptyInput = inputLens < promptVariablesLens || Object.values(currInputs).find(v => !v)
+    // if (emptyInput) {
+    //   logError(t('app.errorMessage.valueOfVarRequired'))
+    //   return false
+    // }
     return true
   }
 

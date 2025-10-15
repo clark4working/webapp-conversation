@@ -172,16 +172,17 @@ const Welcome: FC<IWelcomeProps> = ({
   }
 
   const canChat = () => {
-    const inputLens = Object.values(inputs).length
-    const promptVariablesLens = promptConfig.prompt_variables.length
-    const emptyInput = inputLens < promptVariablesLens || Object.entries(inputs).filter(([k, v]) => {
-      const isRequired = promptConfig.prompt_variables.find(item => item.key === k)?.required ?? true
-      return isRequired && v === ''
-    }).length > 0
-    if (emptyInput) {
-      logError(t('app.errorMessage.valueOfVarRequired'))
-      return false
-    }
+    // 注释掉输入验证，允许空输入
+    // const inputLens = Object.values(inputs).length
+    // const promptVariablesLens = promptConfig.prompt_variables.length
+    // const emptyInput = inputLens < promptVariablesLens || Object.entries(inputs).filter(([k, v]) => {
+    //   const isRequired = promptConfig.prompt_variables.find(item => item.key === k)?.required ?? true
+    //   return isRequired && v === ''
+    // }).length > 0
+    // if (emptyInput) {
+    //   logError(t('app.errorMessage.valueOfVarRequired'))
+    //   return false
+    // }
     return true
   }
 

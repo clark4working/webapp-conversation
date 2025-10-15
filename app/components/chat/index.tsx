@@ -70,11 +70,12 @@ const Chat: FC<IChatProps> = ({
   }
 
   const valid = () => {
-    const query = queryRef.current
-    if (!query || query.trim() === '') {
-      logError(t('app.errorMessage.valueOfVarRequired'))
-      return false
-    }
+    // 注释掉空值验证，允许发送空消息
+    // const query = queryRef.current
+    // if (!query || query.trim() === '') {
+    //   logError(t('app.errorMessage.valueOfVarRequired'))
+    //   return false
+    // }
     return true
   }
 
