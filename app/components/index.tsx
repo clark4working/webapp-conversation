@@ -652,53 +652,53 @@ const Main: FC<IMainProps> = () => {
   if (!APP_ID || !APP_INFO || !promptConfig) { return <Loading type='app' /> }
 
   return (
-    <div className='relative h-screen bg-chatbot-bg p-4'>
-      <div className="flex flex-col rounded-2xl bg-white shadow-md overflow-hidden max-w-7xl mx-auto h-[calc(100vh-2rem)]">
-        <Header
-          title={APP_INFO.title}
-          isMobile={isMobile}
-          onShowSideBar={showSidebar}
-          onCreateNewChat={() => handleConversationIdChange('-1')}
-        />
-        <div className="flex flex-1 overflow-hidden">
-        {/* sidebar */}
-        {!isMobile && renderSidebar()}
-        {isMobile && isShowSidebar && (
-          <div className='fixed inset-0 z-50' style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }} onClick={hideSidebar} >
-            <div className='inline-block' onClick={e => e.stopPropagation()}>
-              {renderSidebar()}
-            </div>
+    <div className='flex h-screen bg-background-default-burn p-2'>
+      {/* sidebar */}
+      {!isMobile && renderSidebar()}
+      {isMobile && isShowSidebar && (
+        <div className='fixed inset-0 z-50' style={{ backgroundColor: 'rgba(35, 56, 118, 0.2)' }} onClick={hideSidebar} >
+          <div className='inline-block' onClick={e => e.stopPropagation()}>
+            {renderSidebar()}
           </div>
-        )}
-        {/* main */}
-        <div className='flex-grow flex flex-col overflow-y-auto bg-chatbot-bg'>
-          <ConfigSence
-            conversationName={conversationName}
-            hasSetInputs={hasSetInputs}
-            isPublicVersion={isShowPrompt}
-            siteInfo={APP_INFO}
-            promptConfig={promptConfig}
-            onStartChat={handleStartChat}
-            canEditInputs={canEditInputs}
-            savedInputs={currInputs as Record<string, any>}
-            onInputsChange={setCurrInputs}
-          ></ConfigSence>
-
-          {
-            hasSetInputs && (
-              <div className='relative grow pc:w-[794px] max-w-full mobile:w-full pb-[180px] mx-auto mb-3.5' ref={chatListDomRef}>
-                <Chat
-                  chatList={chatList}
-                  onSend={handleSend}
-                  onFeedback={handleFeedback}
-                  isResponding={isResponding}
-                  checkCanSend={checkCanSend}
-                  visionConfig={visionConfig}
-                  fileConfig={fileConfig}
-                />
-              </div>)
-          }
         </div>
+      )}
+      {/* main */}
+      <div className='relative flex-grow p-2'>
+        <div className='flex h-full flex-col overflow-hidden rounded-2xl border-[0.5px] border-components-panel-border-subtle bg-chatbot-bg shadow-md'>
+          <Header
+            title={APP_INFO.title}
+            isMobile={isMobile}
+            onShowSideBar={showSidebar}
+            onCreateNewChat={() => handleConversationIdChange('-1')}
+          />
+          <div className='flex-grow flex flex-col overflow-y-auto'>
+            <ConfigSence
+              conversationName={conversationName}
+              hasSetInputs={hasSetInputs}
+              isPublicVersion={isShowPrompt}
+              siteInfo={APP_INFO}
+              promptConfig={promptConfig}
+              onStartChat={handleStartChat}
+              canEditInputs={canEditInputs}
+              savedInputs={currInputs as Record<string, any>}
+              onInputsChange={setCurrInputs}
+            ></ConfigSence>
+
+            {
+              hasSetInputs && (
+                <div className='relative grow pc:w-[794px] max-w-full mobile:w-full mx-auto' ref={chatListDomRef}>
+                  <Chat
+                    chatList={chatList}
+                    onSend={handleSend}
+                    onFeedback={handleFeedback}
+                    isResponding={isResponding}
+                    checkCanSend={checkCanSend}
+                    visionConfig={visionConfig}
+                    fileConfig={fileConfig}
+                  />
+                </div>)
+            }
+          </div>
         </div>
       </div>
     </div>
